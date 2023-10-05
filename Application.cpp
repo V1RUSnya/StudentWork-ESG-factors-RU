@@ -1,5 +1,6 @@
 #include<iostream>
 #include <cstdlib>
+#include <string>
 using namespace std;
 
 int inputwitchcheck(int max) {
@@ -13,7 +14,39 @@ int inputwitchcheck(int max) {
 	return number;
 }
 
-void vvod(int pos, int* Efactor, int* Sfactor, int* Gfactor) {
+string emptycheck(int num) {
+	string word;
+	if (num==0){
+		while (true) {
+			getline(cin, word);
+			if (!word.empty()) {
+				break;
+			}
+			cout << "Вы ввели пустую строку. Попробуйте еще раз." << endl;
+		}
+	}
+	if (num == 1) {
+		while (true) {
+			getline(cin, word);
+			int lenght = word.length();
+			if (!word.empty() && lenght==10) {
+				break;
+			}
+			cout << "Ошибка! Попробуйте еще раз." << endl;
+		}
+	}
+	if (num == 2) {
+		getline(cin, word);
+		if (!word.empty()) {
+			word = "-";
+		}
+	}
+	system("cls");
+	cout << "Введите данные:\n";
+	return word;
+}
+
+void inputnum(int pos, int* Efactor, int* Sfactor, int* Gfactor) {
 	setlocale(LC_ALL, "Rus");
 	int answerA = 0, answerB = 0, answerC = 0, answerD = 0, answerE = 0, answerF = 0, answerG = 0;
 	if (pos == 1) {
@@ -53,23 +86,36 @@ void vvod(int pos, int* Efactor, int* Sfactor, int* Gfactor) {
 	system("cls");
 }
 
-void vivod(int* arr, int size) {
+void org() {
+	string name, inn, kpp, adres;
+	cout << "Введите данные:\nНазвание (обязательно к заполнению): ";
+	name = emptycheck(0);
+	cout << "Введите ИНН (обязательно к заполнению): ";
+	inn = emptycheck(1);
+	cout << "Введите КПП: ";
+	kpp = emptycheck(2);
+	cout << "Введите адрес: ";
+	adres = emptycheck(2);
+}
+void output(int* arr, int size) {
 	for (int i=0; i < size; i++) {
 		cout << arr[i] << endl;
 	}
 }
 
 int main() {
+	setlocale(LC_ALL, "Rus");
+	org();
 	int Efactor[3]{}, Sfactor[7]{}, Gfactor[4]{};
 	cout << "E-фактор (экологические факторы)\n0-11 баллов\n\n";
-	vvod(1, Efactor, Sfactor, Gfactor);
+	inputnum(1, Efactor, Sfactor, Gfactor);
 	cout << "S-фактор (социальные факторы)\n0-5 баллов\n\n";
-	vvod(2, Efactor, Sfactor, Gfactor);
+	inputnum(2, Efactor, Sfactor, Gfactor);
 	cout << "G-фактор (управленчиские факторы)\n0-8 баллов\n\n";
-	vvod(3, Efactor, Sfactor, Gfactor);
+	inputnum(3, Efactor, Sfactor, Gfactor);
 
-	vivod(Efactor, 3);
-	vivod(Sfactor, 7);
-	vivod(Gfactor, 4);
-	//system("pause");
+	output(Efactor, 3);
+	output(Sfactor, 7);
+	output(Gfactor, 4);
+	//system("pause"); \t
 }
