@@ -13,6 +13,11 @@ int inputwitchcheck(int max) {
 	cout << "OK!" << endl << "Ответ: " << number << " засчитан!" << endl;
 	return number;
 }
+void outputArray(int* arr, int size) {
+	for (int i = 0; i < size; i++) {
+		cout << arr[i] << endl;
+	}
+}
 
 string emptycheck(int num) {
 	string word;
@@ -48,7 +53,6 @@ string emptycheck(int num) {
 
 void inputnum(int pos, int* Efactor, int* Sfactor, int* Gfactor) {
 	setlocale(LC_ALL, "Rus");
-	int answerA = 0, answerB = 0, answerC = 0, answerD = 0, answerE = 0, answerF = 0, answerG = 0;
 	if (pos == 1) {
 		cout << "Энергоэффективность и энергосбережение: ";
 		Efactor[0] = inputwitchcheck(11);
@@ -86,7 +90,7 @@ void inputnum(int pos, int* Efactor, int* Sfactor, int* Gfactor) {
 	system("cls");
 }
 
-void org() {
+string org() {
 	string name, inn, kpp, adres;
 	cout << "Введите данные:\nНазвание (обязательно к заполнению): ";
 	name = emptycheck(0);
@@ -96,17 +100,16 @@ void org() {
 	kpp = emptycheck(2);
 	cout << "Введите адрес: ";
 	adres = emptycheck(2);
+	return name, inn, kpp, adres;
 }
-void output(int* arr, int size) {
-	for (int i=0; i < size; i++) {
-		cout << arr[i] << endl;
-	}
-}
+
 
 int main() {
 	setlocale(LC_ALL, "Rus");
-	org();
+	string name, inn, kpp, adres;
 	int Efactor[3]{}, Sfactor[7]{}, Gfactor[4]{};
+
+	name, inn, kpp, adres = org();
 	cout << "E-фактор (экологические факторы)\n0-11 баллов\n\n";
 	inputnum(1, Efactor, Sfactor, Gfactor);
 	cout << "S-фактор (социальные факторы)\n0-5 баллов\n\n";
@@ -114,8 +117,8 @@ int main() {
 	cout << "G-фактор (управленчиские факторы)\n0-8 баллов\n\n";
 	inputnum(3, Efactor, Sfactor, Gfactor);
 
-	output(Efactor, 3);
-	output(Sfactor, 7);
-	output(Gfactor, 4);
+	outputArray(Efactor, 3);
+	outputArray(Sfactor, 7);
+	outputArray(Gfactor, 4);
 	//system("pause"); \t
 }
