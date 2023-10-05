@@ -1,6 +1,9 @@
 #include<iostream>
 #include <cstdlib>
 #include <string>
+#include <tuple>
+#include <cstdlib>
+#include <iomanip>
 using namespace std;
 
 int inputwitchcheck(int max) {
@@ -12,11 +15,6 @@ int inputwitchcheck(int max) {
 	}
 	cout << "OK!" << endl << "Ответ: " << number << " засчитан!" << endl;
 	return number;
-}
-void outputArray(int* arr, int size) {
-	for (int i = 0; i < size; i++) {
-		cout << arr[i] << endl;
-	}
 }
 
 string emptycheck(int num) {
@@ -42,7 +40,7 @@ string emptycheck(int num) {
 	}
 	if (num == 2) {
 		getline(cin, word);
-		if (!word.empty()) {
+		if (word.empty()) {
 			word = "-";
 		}
 	}
@@ -52,7 +50,6 @@ string emptycheck(int num) {
 }
 
 void inputnum(int pos, int* Efactor, int* Sfactor, int* Gfactor) {
-	setlocale(LC_ALL, "Rus");
 	if (pos == 1) {
 		cout << "Энергоэффективность и энергосбережение: ";
 		Efactor[0] = inputwitchcheck(11);
@@ -90,26 +87,65 @@ void inputnum(int pos, int* Efactor, int* Sfactor, int* Gfactor) {
 	system("cls");
 }
 
-string org() {
-	string name, inn, kpp, adres;
+struct Organization {
+	string name;
+	string inn;
+	string kpp;
+	string adres;
+};
+
+Organization  org() {
+	Organization orgData;
 	cout << "Введите данные:\nНазвание (обязательно к заполнению): ";
-	name = emptycheck(0);
+	orgData.name = emptycheck(0);
 	cout << "Введите ИНН (обязательно к заполнению): ";
-	inn = emptycheck(1);
+	orgData.inn = emptycheck(1);
 	cout << "Введите КПП: ";
-	kpp = emptycheck(2);
+	orgData.kpp = emptycheck(2);
 	cout << "Введите адрес: ";
-	adres = emptycheck(2);
-	return name, inn, kpp, adres;
+	orgData.adres = emptycheck(2);
+	return orgData;
 }
 
+void workstage1(string name, string inn, string kpp, string adres, int* Efactor, int* Sfactor, int* Gfactor) {
+	int a, b, c, d, e, f, g, summ1,summ2,summ3, table = 70;
+	cout << "Название: " << name << "\nИНН: " << inn << "\nКПП: " << kpp << "\nАдрес: " << adres << endl;
+
+	tie(a, b, c) = { Efactor[0], Efactor[1], Efactor[2] };
+	summ1 = a + b + c;
+	cout << left << setw(table) << "E-фактор (экологические факторы)" << right << summ1 << endl;
+	cout << left << setw(table) << "  Энергоэффективность и энергосбережение" << right << a << endl;
+	cout << left << setw(table) << "  Инвестиции и расходы на охрану окружающей среды" << right << b << endl;
+	cout << left << setw(table) << "  Выбросы, сбросы, образование отходов и их утилизация" << right << c << endl;
+
+	tie(a, b, c, d, e, f, g) = { Sfactor[0],Sfactor[1], Sfactor[2], Sfactor[3], Sfactor[4], Sfactor[5], Sfactor[6] };
+	summ2 = a + b + c + d + e + f + g;
+	cout << left << setw(table) << "S-фактор (социальные факторы)" << right << summ2 << endl;
+	cout << left << setw(table) << "  Трудовая практика, занятость" << right << a << endl;
+	cout << left << setw(table) << "  Здоровье и безопасность труда" << right << b << endl;
+	cout << left << setw(table) << "  Подготовка и образование кадров" << right << c << endl;
+	cout << left << setw(table) << "  Гендерный состав работников" << right << d << endl;
+	cout << left << setw(table) << "  Практика отношений с поставщиками и покупателями" << right << e << endl;
+	cout << left << setw(table) << "  Взаимоотношения с сообществами" << right << f << endl;
+	cout << left << setw(table) << "  Ответственность за продукцию/результат" << right << g << endl;
+
+	tie(a, b, c, d) = { Gfactor[0],Gfactor[1], Gfactor[2], Gfactor[3] };
+	summ3 = a + b + c + d;
+	cout << left << setw(table) << "G-фактор (управленчиские факторы)" << right << summ3 << endl;
+	cout << left << setw(table) << "  Деловая этика" << right << a << endl;
+	cout << left << setw(table) << "  Долгосрочная стратегия развития" << right << b << endl;
+	cout << left << setw(table) << "  Аудит и внутренний контроль" << right << c << endl;
+	cout << left << setw(table) << "  Риск-менеджмент" << right << d << endl;
+	cout << "Итого: " << summ1 << "+" << summ2 << "+" << summ3 << "=" << summ1 + summ2 + summ3;
+}
 
 int main() {
 	setlocale(LC_ALL, "Rus");
-	string name, inn, kpp, adres;
+	system("chcp 1251");
+	system("cls");
 	int Efactor[3]{}, Sfactor[7]{}, Gfactor[4]{};
+	Organization organizationData = org();
 
-	name, inn, kpp, adres = org();
 	cout << "E-фактор (экологические факторы)\n0-11 баллов\n\n";
 	inputnum(1, Efactor, Sfactor, Gfactor);
 	cout << "S-фактор (социальные факторы)\n0-5 баллов\n\n";
@@ -117,8 +153,6 @@ int main() {
 	cout << "G-фактор (управленчиские факторы)\n0-8 баллов\n\n";
 	inputnum(3, Efactor, Sfactor, Gfactor);
 
-	outputArray(Efactor, 3);
-	outputArray(Sfactor, 7);
-	outputArray(Gfactor, 4);
-	//system("pause"); \t
+	workstage1(organizationData.name, organizationData.inn, organizationData.kpp, organizationData.adres, Efactor, Sfactor, Gfactor);
+	//system("pause");
 }
