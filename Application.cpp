@@ -113,14 +113,14 @@ void workstage1(string name, string inn, string kpp, string adres, int* Efactor,
 
 	tie(a, b, c) = { Efactor[0], Efactor[1], Efactor[2] };
 	summ1 = a + b + c;
-	cout << left << setw(table) << "E-фактор (экологические факторы)" << right << summ1 << endl;
+	cout << left << setw(table) << "\nE-фактор (экологические факторы)" << right << summ1 << endl;
 	cout << left << setw(table) << "  Энергоэффективность и энергосбережение" << right << a << endl;
 	cout << left << setw(table) << "  Инвестиции и расходы на охрану окружающей среды" << right << b << endl;
 	cout << left << setw(table) << "  Выбросы, сбросы, образование отходов и их утилизация" << right << c << endl;
 
 	tie(a, b, c, d, e, f, g) = { Sfactor[0],Sfactor[1], Sfactor[2], Sfactor[3], Sfactor[4], Sfactor[5], Sfactor[6] };
 	summ2 = a + b + c + d + e + f + g;
-	cout << left << setw(table) << "S-фактор (социальные факторы)" << right << summ2 << endl;
+	cout << left << setw(table) << "\nS-фактор (социальные факторы)" << right << summ2 << endl;
 	cout << left << setw(table) << "  Трудовая практика, занятость" << right << a << endl;
 	cout << left << setw(table) << "  Здоровье и безопасность труда" << right << b << endl;
 	cout << left << setw(table) << "  Подготовка и образование кадров" << right << c << endl;
@@ -131,12 +131,12 @@ void workstage1(string name, string inn, string kpp, string adres, int* Efactor,
 
 	tie(a, b, c, d) = { Gfactor[0],Gfactor[1], Gfactor[2], Gfactor[3] };
 	summ3 = a + b + c + d;
-	cout << left << setw(table) << "G-фактор (управленчиские факторы)" << right << summ3 << endl;
+	cout << left << setw(table) << "\nG-фактор (управленчиские факторы)" << right << summ3 << endl;
 	cout << left << setw(table) << "  Деловая этика" << right << a << endl;
 	cout << left << setw(table) << "  Долгосрочная стратегия развития" << right << b << endl;
 	cout << left << setw(table) << "  Аудит и внутренний контроль" << right << c << endl;
 	cout << left << setw(table) << "  Риск-менеджмент" << right << d << endl;
-	cout << "Итого: " << summ1 << "+" << summ2 << "+" << summ3 << "=" << summ1 + summ2 + summ3;
+	cout << "\nИтого: " << summ1 << "+" << summ2 << "+" << summ3 << "=" << summ1 + summ2 + summ3 << "\n\n\n";
 }
 
 int main() {
@@ -154,5 +154,5 @@ int main() {
 	inputnum(3, Efactor, Sfactor, Gfactor);
 
 	workstage1(organizationData.name, organizationData.inn, organizationData.kpp, organizationData.adres, Efactor, Sfactor, Gfactor);
-	//system("pause");
+	system("pause");
 }
