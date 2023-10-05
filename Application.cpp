@@ -4,6 +4,7 @@
 #include <tuple>
 #include <cstdlib>
 #include <iomanip>
+#include <fstream>
 using namespace std;
 
 int inputwitchcheck(int max) {
@@ -139,6 +140,44 @@ void workstage1(string name, string inn, string kpp, string adres, int* Efactor,
 	cout << "\nИтого: " << summ1 << "+" << summ2 << "+" << summ3 << "=" << summ1 + summ2 + summ3 << "\n\n\n";
 }
 
+void workstage2(string name, string inn, string kpp, string adres, int* Efactor, int* Sfactor, int* Gfactor) {
+	int a, b, c, d, e, f, g, summ1, summ2, summ3, table = 70;
+
+	ofstream outputFile;
+	outputFile.open(name+".txt", ios::out | ios::app);
+
+	outputFile << "Название: " << name << "\nИНН: " << inn << "\nКПП: " << kpp << "\nАдрес: " << adres << endl;
+
+	tie(a, b, c) = { Efactor[0], Efactor[1], Efactor[2] };
+	summ1 = a + b + c;
+	outputFile << left << setw(table) << "\nE-фактор (экологические факторы)" << right << summ1 << endl;
+	outputFile << left << setw(table) << "  Энергоэффективность и энергосбережение" << right << a << endl;
+	outputFile << left << setw(table) << "  Инвестиции и расходы на охрану окружающей среды" << right << b << endl;
+	outputFile << left << setw(table) << "  Выбросы, сбросы, образование отходов и их утилизация" << right << c << endl;
+
+	tie(a, b, c, d, e, f, g) = { Sfactor[0],Sfactor[1], Sfactor[2], Sfactor[3], Sfactor[4], Sfactor[5], Sfactor[6] };
+	summ2 = a + b + c + d + e + f + g;
+	outputFile << left << setw(table) << "\nS-фактор (социальные факторы)" << right << summ2 << endl;
+	outputFile << left << setw(table) << "  Трудовая практика, занятость" << right << a << endl;
+	outputFile << left << setw(table) << "  Здоровье и безопасность труда" << right << b << endl;
+	outputFile << left << setw(table) << "  Подготовка и образование кадров" << right << c << endl;
+	outputFile << left << setw(table) << "  Гендерный состав работников" << right << d << endl;
+	outputFile << left << setw(table) << "  Практика отношений с поставщиками и покупателями" << right << e << endl;
+	outputFile << left << setw(table) << "  Взаимоотношения с сообществами" << right << f << endl;
+	outputFile << left << setw(table) << "  Ответственность за продукцию/результат" << right << g << endl;
+
+	tie(a, b, c, d) = { Gfactor[0],Gfactor[1], Gfactor[2], Gfactor[3] };
+	summ3 = a + b + c + d;
+	outputFile << left << setw(table) << "\nG-фактор (управленчиские факторы)" << right << summ3 << endl;
+	outputFile << left << setw(table) << "  Деловая этика" << right << a << endl;
+	outputFile << left << setw(table) << "  Долгосрочная стратегия развития" << right << b << endl;
+	outputFile << left << setw(table) << "  Аудит и внутренний контроль" << right << c << endl;
+	outputFile << left << setw(table) << "  Риск-менеджмент" << right << d << endl;
+	outputFile << "\nИтого: " << summ1 << "+" << summ2 << "+" << summ3 << "=" << summ1 + summ2 + summ3 << "\n\n\n";
+	cout << "Данные успешно записаны в файл " + name + ".txt." << endl;
+	outputFile.close();
+}
+
 int main() {
 	setlocale(LC_ALL, "Rus");
 	system("chcp 1251");
@@ -154,5 +193,6 @@ int main() {
 	inputnum(3, Efactor, Sfactor, Gfactor);
 
 	workstage1(organizationData.name, organizationData.inn, organizationData.kpp, organizationData.adres, Efactor, Sfactor, Gfactor);
+	workstage2(organizationData.name, organizationData.inn, organizationData.kpp, organizationData.adres, Efactor, Sfactor, Gfactor);
 	system("pause");
 }
