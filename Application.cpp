@@ -1,5 +1,5 @@
 #include<iostream>
-#include <cstdlib> //system("cls");
+#include <cstdlib>
 using namespace std;
 
 int inputwitchcheck(int max) {
@@ -18,66 +18,39 @@ void vvod(int pos, int* Efactor, int* Sfactor, int* Gfactor) {
 	int answerA = 0, answerB = 0, answerC = 0, answerD = 0, answerE = 0, answerF = 0, answerG = 0;
 	if (pos == 1) {
 		cout << "Энергоэффективность и энергосбережение: ";
-		answerA = inputwitchcheck(11);
-
+		Efactor[0] = inputwitchcheck(11);
 		cout << "Инвестиции и расходы на охрану окружающей среды: ";
-		answerB = inputwitchcheck(11);
-
+		Efactor[1] = inputwitchcheck(11);
 		cout << "Выбросы, сбросы, образование отходов и их утилизация: ";
-		answerC = inputwitchcheck(11);
-
-		Efactor[0] = answerA;
-		Efactor[1] = answerB;
-		Efactor[2] = answerC;
+		Efactor[2] = inputwitchcheck(11);
 	}
 	if (pos == 2) {
 		cout << "Трудовая практика, занятость: ";
-		answerA = inputwitchcheck(5);
-
+		Sfactor[0] = inputwitchcheck(5);
 		cout << "Здоровье и безопасность труда: ";
-		answerB = inputwitchcheck(5);
-
+		Sfactor[1] = inputwitchcheck(5);
 		cout << "Подготовка и образование кадров: ";
-		answerC = inputwitchcheck(5);
-
+		Sfactor[2] = inputwitchcheck(5);
 		cout << "Гендерный состав работников: ";
-		answerD = inputwitchcheck(5);
-
+		Sfactor[3] = inputwitchcheck(5);
 		cout << "Практика отношений с поставщиками и покупателями: ";
-		answerE = inputwitchcheck(5);
-
+		Sfactor[4] = inputwitchcheck(5);
 		cout << "Взаимоотношения с сообществами: ";
-		answerF = inputwitchcheck(5);
-
+		Sfactor[5] = inputwitchcheck(5);
 		cout << "Ответственность за продукцию/результат: ";
-		answerG = inputwitchcheck(5);
-
-		Sfactor[0] = answerA;
-		Sfactor[1] = answerB;
-		Sfactor[2] = answerC;
-		Sfactor[3] = answerD;
-		Sfactor[4] = answerE;
-		Sfactor[5] = answerF;
-		Sfactor[6] = answerG;
+		Sfactor[6] = inputwitchcheck(5);
 	}
 	if (pos == 3) {
 		cout << "Деловая этика: ";
-		answerA = inputwitchcheck(8);
-
+		Gfactor[0] = inputwitchcheck(8);
 		cout << "Долгосрочная стратегия развития: ";
-		answerB = inputwitchcheck(8);
-
+		Gfactor[1] = inputwitchcheck(8);
 		cout << "Аудит и внутренний контроль: ";
-		answerC = inputwitchcheck(8);
-
+		Gfactor[2] = inputwitchcheck(8);
 		cout << "Риск-менеджмент: ";
-		answerC = inputwitchcheck(8);
-
-		Gfactor[0] = answerA;
-		Gfactor[1] = answerB;
-		Gfactor[2] = answerC;
-		Gfactor[3] = answerC;
+		Gfactor[3] = inputwitchcheck(8);
 	}
+	system("cls");
 }
 
 void vivod(int* arr, int size) {
